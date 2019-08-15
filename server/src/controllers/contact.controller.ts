@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import contactService from "../services/contact.service";
 
 class ContactController {
 
@@ -10,8 +11,14 @@ class ContactController {
      * @param {NextFunction} next
      * @memberof ContactController
      */
-    public index(req: Request, res: Response, next: NextFunction): void {
-        res.json("OK");
+    public async index(req: Request, res: Response, next: NextFunction) {
+        try {
+            const contacts = await contactService.index();
+
+            res.json({ data: contacts });
+        } catch (e) {
+            res.json({ error: e }).status(500);
+        }
     }
 
     /**
@@ -22,8 +29,15 @@ class ContactController {
      * @param {NextFunction} next
      * @memberof ContactController
      */
-    public get(req: Request, res: Response, next: NextFunction): void {
-        res.json("OK");
+    public async get(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id: number = +req.params.id;
+            const contact = await contactService.get(id);
+
+            res.json({ data: contact });
+        } catch (e) {
+            res.json({ error: e }).status(500);
+        }
     }
 
     /**
@@ -34,8 +48,15 @@ class ContactController {
      * @param {NextFunction} next
      * @memberof ContactController
      */
-    public add(req: Request, res: Response, next: NextFunction): void {
-        res.json("OK");
+    public async add(req: Request, res: Response, next: NextFunction) {
+        try {
+            const contactData = req.body;
+            const contact = await contactService.add(contactData);
+
+            res.json({ data: contact });
+        } catch (e) {
+            res.json({ error: e }).status(500);
+        }
     }
 
     /**
@@ -46,8 +67,17 @@ class ContactController {
      * @param {NextFunction} next
      * @memberof ContactController
      */
-    public update(req: Request, res: Response, next: NextFunction): void {
-        res.json("OK");
+    public async update(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id: number = +req.params.id;
+            const contactData = req.body;
+            const contact = await contactService.update(id, contactData);
+
+            res.json({ data: contact });
+
+        } catch (e) {
+            res.json({ error: e }).status(500);
+        }
     }
 
     /**
@@ -58,8 +88,15 @@ class ContactController {
      * @param {NextFunction} next
      * @memberof ContactController
      */
-    public delete(req: Request, res: Response, next: NextFunction): void {
-        res.json("OK");
+    public async delete(req: Request, res: Response, next: NextFunction) {
+        try {
+            const id: number = +req.params.id;
+            const deleted: boolean = await contactService.delete(id);
+
+            res.json({ data: deleted });
+        } catch (e) {
+            res.json({ error: e }).status(500);
+        }
     }
 }
 

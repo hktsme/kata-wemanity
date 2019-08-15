@@ -49,7 +49,7 @@ describe("Contact tests", function () {
             expect(res.body.data[0]).to.have.property("firstname");
             expect(res.body.data[0]).to.have.property("phone");
         }
-        expect(res.body.error).to.be.empty;
+        expect(res.body.error).to.be.undefined;
     });
 
     it("GET /contacts/:id should return a specific contact", async function () {
@@ -83,8 +83,7 @@ describe("Contact tests", function () {
 
         expect(res.status).to.equal(200);
         expect(res.body).not.to.be.empty;
-        expect(res.body.data).not.to.be.empty;
         expect(res.body.data).to.be.equal(true);
-        expect(res.body.error).to.be.empty;
+        expect(res.body.error).to.be.undefined;
     });
 });
