@@ -1,0 +1,53 @@
+# ----- SERVER -----
+
+# dependencies
+server/node_modules
+server/package-lock.json
+
+# compiled output
+server/dist
+server/build
+
+# IDE - VSCode
+server/.vscode/*
+server/!.vscode/settings.json
+server/!.vscode/tasks.json
+server/!.vscode/launch.json
+server/!.vscode/extensions.json
+server/.history/*
+
+# ----- APP -----
+
+# dependencies
+app/node_modules
+app/package-lock.json
+# compiled output
+app/dist
+app/tmp
+app/out-tsc
+
+# profiling files
+app/chrome-profiler-events*.json
+app/speed-measure-plugin*.json
+
+# IDE - VSCode
+app/.vscode/*
+app/!.vscode/settings.json
+app/!.vscode/tasks.json
+app/!.vscode/launch.json
+app/!.vscode/extensions.json
+app/.history/*
+
+# misc
+app/.sass-cache
+app/connect.lock
+app/coverage
+app/libpeerconnection.log
+app/npm-debug.log
+app/yarn-error.log
+app/testem.log
+app/typings
+
+# System Files
+app/.DS_Store
+app/Thumbs.db
