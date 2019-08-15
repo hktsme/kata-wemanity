@@ -13,7 +13,8 @@ class ContactController {
      */
     public async index(req: Request, res: Response, next: NextFunction) {
         try {
-            const contacts = await contactService.index();
+            const search: string = req.query.search;
+            const contacts = await contactService.index(search);
 
             res.json({ data: contacts });
         } catch (e) {
