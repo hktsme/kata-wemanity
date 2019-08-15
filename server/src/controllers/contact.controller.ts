@@ -13,7 +13,8 @@ class ContactController {
      */
     public async index(req: Request, res: Response, next: NextFunction) {
         try {
-            const search: string = req.query.search;
+            const search: string = !!req.query.search && req.query.search.length ?
+                decodeURIComponent(req.query.search) : null;
             const contacts = await contactService.index(search);
 
             res.json({ data: contacts });
