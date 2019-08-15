@@ -13,7 +13,7 @@ export class ContactService {
         let query = this.Table.select();
         if (search && search.length) {
             query = query.where("lastname", "like", `%${search}%`)
-                         .orWhere("fistname", "like", `%${search}%`)
+                         .orWhere("firstname", "like", `%${search}%`)
                          .orWhere("phone", "like", `%${search}%`);
         }
 
