@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,7 +13,7 @@ import { Contact } from '../models/contact';
   templateUrl: './contact-detail.component.html',
   styleUrls: ['./contact-detail.component.scss']
 })
-export class ContactDetailComponent implements OnInit, AfterViewChecked, OnDestroy {
+export class ContactDetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('lastnameInput', { static: false }) public lastnameInput: ElementRef;
 
@@ -57,7 +57,7 @@ export class ContactDetailComponent implements OnInit, AfterViewChecked, OnDestr
     });
   }
 
-  public ngAfterViewChecked() {
+  public ngAfterViewInit() {
     setTimeout(() => { this.lastnameInput.nativeElement.focus(); }, 1);
   }
 
