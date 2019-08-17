@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { switchMap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 
 import { ContactService } from '../services/contact.service';
 import { Contact } from '../models/contact';
@@ -13,9 +13,10 @@ import { Contact } from '../models/contact';
   templateUrl: './contact-detail.component.html',
   styleUrls: ['./contact-detail.component.scss']
 })
-export class ContactDetailComponent implements OnInit {
+export class ContactDetailComponent implements OnInit, OnDestroy {
 
   private contactId: number;
+  private routeParamSub: Subscription;
   public contactForm: FormGroup;
   public isLoadingContact: boolean;
 
@@ -38,19 +39,24 @@ export class ContactDetailComponent implements OnInit {
       phone: [ '', [ Validators.required, Validators.maxLength(25), Validators.pattern(/^[+][1-9][\d][\s][\d]{2}[\s][\d]{6,}$/) ] ]
     });
 
-    this.route.paramMap.pipe(
+    this.routeParamSub = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         const id: string = params.get('id');
 
         return isNaN(+id) ? of(null) : this.contactService.get(+id);
       })
     ).subscribe((contact: Contact) => {
+      // If there is contact data we are in edit mode so preset the form.
       if (contact) {
         this.contactForm.patchValue(contact);
         this.contactId = contact.id;
       }
       this.isLoadingContact = false;
     });
+  }
+
+  public ngOnDestroy() {
+    this.routeParamSub.unsubscribe();
   }
 
   public save() {

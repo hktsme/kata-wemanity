@@ -32,6 +32,7 @@ export class ContactListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public ngAfterViewInit() {
     this.search$.pipe(
+      // Debounce to avoid multiple request when user is typing in search input.
       debounceTime(250),
       switchMap(search => {
         return this.contactService.list(search).pipe(
@@ -49,6 +50,7 @@ export class ContactListComponent implements OnInit, OnDestroy, AfterViewInit {
       this.isLoadingContacts = false;
     });
 
+    // Trigger first load.
     this.search$.next();
   }
 
