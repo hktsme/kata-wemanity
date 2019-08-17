@@ -1,5 +1,7 @@
+@import "../assets/styles/_variables.scss";
+
 header {
-    background-color: #444;
+    background-color: $primary;
     width: 100%;
     min-height: 130px;
     display: flex;

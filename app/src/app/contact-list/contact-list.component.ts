@@ -1,15 +1,16 @@
-import { Component, AfterViewInit, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { Contact } from '../models/contact';
-import { Observable, of, Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { debounceTime, catchError, switchMap } from 'rxjs/operators';
 import { ContactService } from '../services/contact.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss']
 })
-export class ContactListComponent implements OnInit, AfterViewInit {
+export class ContactListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public search$: Subject<string>;
   public displayedColumns: string[];
@@ -18,11 +19,12 @@ export class ContactListComponent implements OnInit, AfterViewInit {
 
   public constructor(
     private cdr: ChangeDetectorRef,
-    private contactService: ContactService)
-  {
+    private contactService: ContactService,
+    private snackBar: MatSnackBar) {
+
     this.search$ = new Subject<string>();
     this.isLoadingContacts = true;
-    this.displayedColumns = [ 'lastname', 'firstname', 'phone' ];
+    this.displayedColumns = [ 'lastname', 'firstname', 'phone', 'action' ];
   }
 
   public ngOnInit() {
@@ -34,7 +36,13 @@ export class ContactListComponent implements OnInit, AfterViewInit {
       debounceTime(250),
       switchMap(search => {
         return this.contactService.list(search).pipe(
-          catchError(() => of([]))
+          catchError(() => {
+            this.snackBar.open('Error when loading contacts', null, {
+              duration: 3000,
+              panelClass: [ 'error-snackbar' ]
+            });
+            return of([]);
+          })
         );
       })
     ).subscribe(contacts => {
@@ -45,11 +53,11 @@ export class ContactListComponent implements OnInit, AfterViewInit {
     this.search$.next();
   }
 
-  public goToDetail(id: number) {
-
+  public ngOnDestroy() {
+    this.search$.complete();
   }
 
   public applySearch(search: string) {
-    this.search$.next(search);
+    this.search$.next(search.trim());
   }
 }

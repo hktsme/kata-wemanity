@@ -48,4 +48,18 @@
 
 table {
     width: 100%;
+
+    .mat-row:hover {
+        background-color: #EFEFEF;
+    }
+
+    .align-right{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        .mat-icon {
+            cursor: pointer;
+        }
+    }
 }
