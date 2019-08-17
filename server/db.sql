@@ -1,6 +1,5 @@
-DROP SCHEMA IF EXISTS `katawemanity`;
-
 -- INITIALIZE DATABASE
+DROP SCHEMA IF EXISTS `katawemanity`;
 CREATE SCHEMA `katawemanity`;
 USE `katawemanity`;
 
@@ -20,6 +19,7 @@ INSERT INTO contacts (lastname, firstname, phone) VALUES ("Dupont", "Albert", "+
 INSERT INTO contacts (lastname, firstname, phone) VALUES ("Dupont", "Sarah", "+22 06 123456");
 
 -- INITIALIZE TEST DATABASE
+DROP SCHEMA IF EXISTS `katawemanity_test`;
 CREATE SCHEMA `katawemanity_test`;
 USE `katawemanity_test`;
 
