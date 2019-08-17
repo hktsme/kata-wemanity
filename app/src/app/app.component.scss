@@ -1,0 +1,32 @@
+header {
+    background-color: #444;
+    width: 100%;
+    min-height: 130px;
+    display: flex;
+    align-items: center;
+    
+    .title {
+        padding-left: 5%;
+        display: inline-flex;
+        align-items: center;
+        width: 100%;
+
+        .mat-icon {
+            font-size: 36px;
+            color: white;
+            top: -4px;
+            cursor: pointer;
+        }
+    
+        span {
+            font-size: 36px;
+            margin: 0;
+            padding-left: 5%;
+            width: 100%;
+            color: white;
+            letter-spacing: 5px;
+            vertical-align: bottom;
+        }
+    }
+
+}
