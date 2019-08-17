@@ -12,8 +12,10 @@ export class ContactService {
 
   public constructor(private http: HttpClient) { }
 
-  public list() {
-    return this.http.get<any>(CONTACT_URI).pipe(
+  public list(search?: string) {
+    const url: string = search && search.length ? `${CONTACT_URI}?search=${encodeURIComponent(search)}` : CONTACT_URI;
+
+    return this.http.get<any>(url).pipe(
       map(res => res.data)
     );
   }

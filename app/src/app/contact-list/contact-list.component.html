@@ -10,7 +10,7 @@
             <div class="quick-bar">
                     <form class="search-form">
                         <mat-form-field class="search-input">
-                            <input type="text" matInput placeholder="Search">
+                            <input type="text" matInput placeholder="Search" (keyup)="applySearch($event.target.value)">
                             <mat-icon matSuffix>search</mat-icon>
                         </mat-form-field>
                     </form>
