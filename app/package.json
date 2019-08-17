@@ -2,14 +2,15 @@
   "name": "kata-wemanity",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "ng": "node_modules/.bin/ng",
+    "start": "node_modules/.bin/ng serve --proxy-config proxy.config.json",
+    "build": "node_modules/.bin/ng build",
+    "test": "node_modules/.bin/ng test",
+    "lint": "node_modules/.bin/ng lint",
+    "e2e": "node_modules/.bin/ng e2e"
   },
-  "private": true,
+  "private": false,
+  "license": "Apache-2.0",
   "dependencies": {
     "@angular/animations": "^8.2.2",
     "@angular/cdk": "^8.1.3",

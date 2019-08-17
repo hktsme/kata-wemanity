@@ -5,13 +5,13 @@
   "main": "src/main.ts",
   "scripts": {
     "build": "rm -rf build && node_modules/.bin/webpack",
-    "watch": "tsc -w",
-    "serve": "nodemon",
+    "watch": "node_modules/.bin/tsc -w",
+    "serve": "node_modules/.bin/nodemon",
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "test": "mocha -r ts-node/register -r tsconfig-paths/register -r ./tsconfig-paths-bootstrap.js src/test/**/*.test.ts"
+    "test": "node_modules/.bin/mocha -r ts-node/register -r tsconfig-paths/register -r ./tsconfig-paths-bootstrap.js src/test/**/*.test.ts"
   },
   "author": "Yves",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "dependencies": {
     "body-parser": "1.18.3",
     "cookie-parser": "^1.4.4",
