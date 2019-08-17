@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,7 +13,9 @@ import { Contact } from '../models/contact';
   templateUrl: './contact-detail.component.html',
   styleUrls: ['./contact-detail.component.scss']
 })
-export class ContactDetailComponent implements OnInit, OnDestroy {
+export class ContactDetailComponent implements OnInit, AfterViewChecked, OnDestroy {
+
+  @ViewChild('lastnameInput', { static: false }) public lastnameInput: ElementRef;
 
   private contactId: number;
   private routeParamSub: Subscription;
@@ -53,6 +55,10 @@ export class ContactDetailComponent implements OnInit, OnDestroy {
       }
       this.isLoadingContact = false;
     });
+  }
+
+  public ngAfterViewChecked() {
+    setTimeout(() => { this.lastnameInput.nativeElement.focus(); }, 1);
   }
 
   public ngOnDestroy() {
