@@ -1,6 +1,4 @@
-<div class="loading-shade" *ngIf="isLoadingContacts">
-    <mat-spinner *ngIf="isLoadingContacts" [diameter]="36" [strokeWidth]="4"></mat-spinner>
-</div>
+<app-loading-component [isLoading]="isLoadingContacts"></app-loading-component>
 
 <mat-card>
     <mat-card-header class="card-header">

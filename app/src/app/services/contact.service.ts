@@ -20,6 +20,12 @@ export class ContactService {
     );
   }
 
+  public get(id: number) {
+    return this.http.get<any>(`${CONTACT_URI}/${id}`).pipe(
+      map(res => res.data)
+    );
+  }
+
   public save(data: any, id?: number) {
     const method: string = !!id ? 'put' : 'post';
     const url: string = !!id ? `${CONTACT_URI}/${id}` : CONTACT_URI;

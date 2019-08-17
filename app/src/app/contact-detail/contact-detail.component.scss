@@ -1,0 +1,22 @@
+.card-title {
+    text-transform: uppercase;
+}
+
+.contact-form {
+    width: 40%;
+    margin: auto;
+
+    .contact-input {
+        width: 100%;
+    }
+
+    .form-actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    
+        button {
+            margin-right: 5px;
+        }
+    }
+}

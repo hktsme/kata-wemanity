@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { Contact } from '../models/contact';
 import { Subject, of } from 'rxjs';
 import { debounceTime, catchError, switchMap } from 'rxjs/operators';
@@ -18,7 +18,6 @@ export class ContactListComponent implements OnInit, OnDestroy, AfterViewInit {
   public data: Contact[] = [];
 
   public constructor(
-    private cdr: ChangeDetectorRef,
     private contactService: ContactService,
     private snackBar: MatSnackBar) {
 

@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
 // MATERIAL IMPORTS
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,15 +19,23 @@ import { AppComponent } from './app.component';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 import { ContactService } from './services/contact.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadingComponentComponent } from './loading-component/loading-component.component';
+
+// Register locale to FR.
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactListComponent,
-    ContactDetailComponent
+    ContactDetailComponent,
+    LoadingComponentComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
